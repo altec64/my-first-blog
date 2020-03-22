@@ -1,7 +1,7 @@
 
 #blog in app views
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import timezone
 from .models import Post
 
@@ -14,3 +14,9 @@ def post_list(request):
     #def render(request, template_name, context=None, content_type=None, status=None, using=None)
     return render(request,'blog/post_list.html',{'posts':posts})
     
+#def function with request and primary key
+def post_detail(request, pk):
+    #post = get object or error
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post':post}) 
+    #post can be any name as long as it contain 'post' that contain get object(post, pk)
